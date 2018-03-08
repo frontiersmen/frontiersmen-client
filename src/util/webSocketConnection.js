@@ -1,6 +1,6 @@
 export default class WebSocketConnection {
   constructor(playerId, authToken, targetName, path, params) {
-    var url = `ws://frontiersmen.herokuapp.com/ws/${path}?playerId=${playerId}&authToken=${authToken}`;
+    var url = `wss://frontiersmen.herokuapp.com/ws/${path}?playerId=${playerId}&authToken=${authToken}`;
     if (params) {
       for (var param in params) {
         url += `&${param}=${params[param]}`;
