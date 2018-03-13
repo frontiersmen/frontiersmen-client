@@ -27,7 +27,7 @@ function LobbyDrawer(props) {
             component="a"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/ericljiang/settlers">
+            href="https://github.com/frontiersmen">
             <ListItemText primary="Read the source on Github" />
             <LaunchIcon />
           </ListItem>
@@ -36,7 +36,7 @@ function LobbyDrawer(props) {
             component="a"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/ericljiang/settlers/issues/new?labels=user%20reported">
+            href="https://github.com/frontiersmen/frontiersmen.github.io/issues/new?labels=user%20reported">
             <ListItemText primary="Report an issue" />
             <LaunchIcon />
           </ListItem>
