@@ -7,6 +7,7 @@ import {
 import './App.css';
 import AuthContainer from './auth/AuthContainer.js'
 import LobbyView from './lobby/LobbyView.js'
+import PregameView from './pregame/PregameView.js';
 import GameView from './game/GameView.js';
 
 class App extends Component {
@@ -33,6 +34,9 @@ class App extends Component {
             )} />
             <Route path="/lobby/:view" render={(props) => (
               <LobbyView {...props} playerId={this.state.playerId} authToken={this.state.authToken} />
+            )} />
+            <Route path="/pregame/:id" render={(props) => (
+              <PregameView {...props} playerId={this.state.playerId} authToken={this.state.authToken} />
             )} />
             <Route path="/game/:id" render={(props) => (
               <GameView {...props} playerId={this.state.playerId} authToken={this.state.authToken} />

@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Table, { TableBody } from 'material-ui/Table';
-import GameSummary from './GameSummary.js';
+import PregameSummary from './PregameSummary.js';
 
 const styles = {
   table: {
@@ -11,13 +11,13 @@ const styles = {
   }
 }
 
-function GameList(props) {
+function PregameList(props) {
   return (
     <Paper className={props.classes.table}>
       <Table>
         <TableBody>
-          {props.games.map(game =>
-            <GameSummary key={game.id} game={game} />
+          {props.pregames.map(pregame =>
+            <PregameSummary key={pregame.gameId} pregame={pregame} />
           )}
         </TableBody>
       </Table>
@@ -25,4 +25,4 @@ function GameList(props) {
   )
 }
 
-export default withStyles(styles)(GameList);
+export default withStyles(styles)(PregameList);

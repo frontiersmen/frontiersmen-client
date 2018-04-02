@@ -12,9 +12,8 @@ export default class LobbyConnection extends WebSocketConnection {
   createGame(owner, name) {
     this.send({
       eventType: "GameCreationEvent",
-      attributes: {
-        name: name
-      }
+      name: name,
+      attributes: {}
     });
   }
 

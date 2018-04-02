@@ -21,7 +21,9 @@ export default class WebSocketConnection {
     this.ws.onmessage = (message) => {
       var event = JSON.parse(message.data);
       console.log(event);
-      this.eventHandlers[event.eventType].forEach(handler => handler(event));
+      if (this.eventHandlers[event.eventType]) {
+        this.eventHandlers[event.eventType].forEach(handler => handler(event));
+      }
     }
 
     this.eventHandlers = {};

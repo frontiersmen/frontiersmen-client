@@ -7,6 +7,7 @@ import LobbyConnection from './lobbyConnection.js';
 import GameCreationDialog from './GameCreationDialog.js';
 import LobbyHeader from './LobbyHeader.js';
 import GameList from './GameList.js';
+import PregameList from './PregameList.js';
 
 const styles = {
   button: {
@@ -22,6 +23,7 @@ class LobbyView extends Component {
     this.state = {
       lobbyConnection: null,
       games: [],
+      pregames: [],
       displayName: '',
       gameCreationDialogOpen: false
     };
@@ -31,6 +33,7 @@ class LobbyView extends Component {
     var lobbyConnection = new LobbyConnection(this.props.playerId, this.props.authToken);
     lobbyConnection.on("LobbyUpdateEvent", event => {
       this.setState({ games: event.games });
+      this.setState({ pregames: event.pregames });
     });
     lobbyConnection.on("PlayerNameChangeEvent", event => {
       if (event.playerId === this.props.playerId) {
@@ -52,21 +55,61 @@ class LobbyView extends Component {
     this.setState({ gameCreationDialogOpen: false });
   }
 
-  render() {
-    const view = this.props.match.params.view;
-    var games;
+  renderGameList(view) {
     if (view === "open-games") {
-      games = this.state.games
-        .filter(game => game.pregame);
+      return (
+        <PregameList pregames={this.state.pregames} />
+      );
     } else if (view === "your-games") {
-      games = this.state.games
-        .filter(game => !game.pregame)
-        .filter(game => game.players.hasOwnProperty(this.props.playerId));
+      var games = this.state.games.filter(game => game.players.hasOwnProperty(this.props.playerId));
+      return (
+        <GameList games={games} />
+      );
     } else {
       return (
         <Redirect to="/lobby/open-games" />
       );
     }
+  }
+
+  render() {
+    // const view = this.props.match.params.view;
+    // var games;
+    // if (view === "open-games") {
+    //   games = this.state.pregames;
+    // } else if (view === "your-games") {
+    //   games = this.state.games
+    //     .filter(game => game.players.hasOwnProperty(this.props.playerId));
+    // } else {
+    //   return (
+    //     <Redirect to="/lobby/open-games" />
+    //   );
+    // }
+
+    // return (
+    //   <div>
+    //     <LobbyHeader
+    //       displayName={this.state.displayName}
+    //       onNameChange={this.state.lobbyConnection.changeDisplayName}
+    //       view={view} />
+    //     <GameList games={games} />
+    //     <Button
+    //       className={this.props.classes.button}
+    //       variant="fab"
+    //       color="secondary"
+    //       aria-label="add"
+    //       onClick={this.openGameCreationDialog}>
+    //       <AddIcon />
+    //     </Button>
+    //     <GameCreationDialog
+    //       open={this.state.gameCreationDialogOpen}
+    //       playerId={this.props.playerId}
+    //       onClose={this.closeGameCreationDialog}
+    //       onSubmit={this.state.lobbyConnection.createGame} />
+    //   </div>
+    // );
+
+    const view = this.props.match.params.view;
 
     return (
       <div>
@@ -74,7 +117,7 @@ class LobbyView extends Component {
           displayName={this.state.displayName}
           onNameChange={this.state.lobbyConnection.changeDisplayName}
           view={view} />
-        <GameList games={games} />
+        { this.renderGameList(view) }
         <Button
           className={this.props.classes.button}
           variant="fab"
