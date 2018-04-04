@@ -14,4 +14,18 @@ export default class PregameConnection extends WebSocketConnection {
       eventType: "StartGameEvent"
     });
   }
+
+  takeSeat(seat) {
+    this.send({
+      eventType: "TakeSeatEvent",
+      seat: seat
+    });
+  }
+
+  leaveSeat(seat) {
+    this.send({
+      eventType: "LeaveSeatEvent",
+      seat: seat
+    });
+  }
 }

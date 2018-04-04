@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import PregameConnection from './pregameConnection.js';
+import Seat from './Seat.js';
+import Button from 'material-ui/Button';
+import List from 'material-ui/List';
+import Paper from 'material-ui/Paper';
 
 export default class PregameView extends Component {
   constructor(props) {
@@ -8,6 +12,8 @@ export default class PregameView extends Component {
       pregameConnection: null,
       pregame: null
     };
+    this.takeSeat = this.takeSeat.bind(this);
+    this.leaveSeat = this.leaveSeat.bind(this);
   }
 
   componentWillMount() {
@@ -15,11 +21,22 @@ export default class PregameView extends Component {
     pregameConnection.on("PregameUpdateEvent", event => {
       this.setState({ pregame: event.pregame });
     });
+    pregameConnection.on("TransitionToGameEvent", event => {
+      this.props.history.push(`/game/${this.state.pregame.gameId}`);
+    });
     this.setState({ pregameConnection: pregameConnection });
   }
 
   componentWillUnmount() {
     this.state.pregameConnection.disconnect();
+  }
+
+  takeSeat(seat) {
+    this.state.pregameConnection.takeSeat(seat);
+  }
+
+  leaveSeat(seat) {
+    this.state.pregameConnection.leaveSeat(seat);
   }
 
   render() {
@@ -30,7 +47,19 @@ export default class PregameView extends Component {
           <p>#{pregame.gameId}</p>
           <p>{pregame.name}</p>
           <p>Created by {pregame.creator.name}</p>
-          <button onClick={this.state.pregameConnection.startGame}>Start</button>
+          <Paper>
+            <List>
+              {pregame.playerSeats.map((occupant, seat) =>
+                <Seat key={seat} onTake={this.takeSeat} onLeave={this.leaveSeat} occupant={occupant} seat={seat} playerId={this.props.playerId} />
+              )}
+            </List>
+          </Paper>
+          <Button disabled={pregame.playerSeats.filter(p => p).length < pregame.minimumPlayers ||
+                            pregame.creator.id !== this.props.playerId}
+                  onClick={this.state.pregameConnection.startGame}
+                  variant="raised">
+            Start
+          </Button>
         </div>
       );
     } else {
