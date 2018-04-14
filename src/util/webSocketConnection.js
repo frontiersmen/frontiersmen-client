@@ -22,7 +22,9 @@ export default class WebSocketConnection {
       this.ws.onclose = (closeEvent) => {
         console.log(`WebSocket connection to ${targetName} was closed. (Reason: (${closeEvent.code}) ${closeEvent.reason})`);
         this.stopHeartbeat();
-        setTimeout(createWebSocket, WEBSOCKET_RETRY_DELAY);
+        if (closeEvent.code !== 1000) {
+          setTimeout(createWebSocket, WEBSOCKET_RETRY_DELAY);
+        }
       }
 
       this.ws.onmessage = (message) => {
