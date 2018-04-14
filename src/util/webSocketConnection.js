@@ -1,23 +1,27 @@
 import { WEBSOCKET_ENDPOINT } from '../config.js';
 import { WEBSOCKET_RETRY_DELAY } from '../config.js';
+import { WEBSOCKET_HEARTBEAT_INTERVAL } from '../config.js';
 
 export default class WebSocketConnection {
   constructor(playerId, authToken, targetName, path, params) {
-    var createWebSocket = () => {
-      var url = `${WEBSOCKET_ENDPOINT}/ws/${path}?playerId=${playerId}&authToken=${authToken}`;
-      if (params) {
-        for (var param in params) {
-          url += `&${param}=${params[param]}`;
-        }
+    var url = `${WEBSOCKET_ENDPOINT}/ws/${path}?playerId=${playerId}&authToken=${authToken}`;
+    if (params) {
+      for (var param in params) {
+        url += `&${param}=${params[param]}`;
       }
+    }
+
+    var createWebSocket = () => {
       this.ws = new WebSocket(url);
 
       this.ws.onopen = () => {
         console.log(`Opened WebSocket connection to ${targetName}`);
+        this.startHeartbeat();
       };
 
       this.ws.onclose = (closeEvent) => {
-        console.log(`WebSocket connection to ${targetName} was closed. (Reason: ${closeEvent.reason})`);
+        console.log(`WebSocket connection to ${targetName} was closed. (Reason: (${closeEvent.code}) ${closeEvent.reason})`);
+        this.stopHeartbeat();
         setTimeout(createWebSocket, WEBSOCKET_RETRY_DELAY);
       }
 
@@ -47,5 +51,17 @@ export default class WebSocketConnection {
       this.eventHandlers[eventType] = [];
     }
     this.eventHandlers[eventType].push(eventHandler);
+  }
+
+  startHeartbeat() {
+    this.heartbeat = setInterval(() => {
+      this.send({
+        eventType: "PingEvent"
+      });
+    }, WEBSOCKET_HEARTBEAT_INTERVAL);
+  }
+
+  stopHeartbeat() {
+    clearInterval(this.heartbeat);
   }
 }

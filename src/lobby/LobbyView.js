@@ -73,42 +73,6 @@ class LobbyView extends Component {
   }
 
   render() {
-    // const view = this.props.match.params.view;
-    // var games;
-    // if (view === "open-games") {
-    //   games = this.state.pregames;
-    // } else if (view === "your-games") {
-    //   games = this.state.games
-    //     .filter(game => game.players.hasOwnProperty(this.props.playerId));
-    // } else {
-    //   return (
-    //     <Redirect to="/lobby/open-games" />
-    //   );
-    // }
-
-    // return (
-    //   <div>
-    //     <LobbyHeader
-    //       displayName={this.state.displayName}
-    //       onNameChange={this.state.lobbyConnection.changeDisplayName}
-    //       view={view} />
-    //     <GameList games={games} />
-    //     <Button
-    //       className={this.props.classes.button}
-    //       variant="fab"
-    //       color="secondary"
-    //       aria-label="add"
-    //       onClick={this.openGameCreationDialog}>
-    //       <AddIcon />
-    //     </Button>
-    //     <GameCreationDialog
-    //       open={this.state.gameCreationDialogOpen}
-    //       playerId={this.props.playerId}
-    //       onClose={this.closeGameCreationDialog}
-    //       onSubmit={this.state.lobbyConnection.createGame} />
-    //   </div>
-    // );
-
     const view = this.props.match.params.view;
 
     return (

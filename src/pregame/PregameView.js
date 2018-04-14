@@ -39,6 +39,11 @@ export default class PregameView extends Component {
     this.state.pregameConnection.leaveSeat(seat);
   }
 
+  canStart() {
+    var pregame = this.state.pregame;
+    return pregame.creator.id === this.props.playerId && pregame.playerSeats.filter(p => p).length >= pregame.minimumPlayers;
+  }
+
   render() {
     var pregame = this.state.pregame;
     if (pregame) {
@@ -50,14 +55,20 @@ export default class PregameView extends Component {
           <Paper>
             <List>
               {pregame.playerSeats.map((occupant, seat) =>
-                <Seat key={seat} onTake={this.takeSeat} onLeave={this.leaveSeat} occupant={occupant} seat={seat} playerId={this.props.playerId} />
+                <Seat
+                  key={seat}
+                  onTake={this.takeSeat}
+                  onLeave={this.leaveSeat}
+                  occupant={occupant}
+                  seat={seat}
+                  playerId={this.props.playerId} />
               )}
             </List>
           </Paper>
-          <Button disabled={pregame.playerSeats.filter(p => p).length < pregame.minimumPlayers ||
-                            pregame.creator.id !== this.props.playerId}
-                  onClick={this.state.pregameConnection.startGame}
-                  variant="raised">
+          <Button
+            disabled={!this.canStart()}
+            onClick={this.state.pregameConnection.startGame}
+            variant="raised">
             Start
           </Button>
         </div>
