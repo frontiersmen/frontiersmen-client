@@ -3,7 +3,7 @@ import { WEBSOCKET_RETRY_DELAY } from '../config.js';
 import { WEBSOCKET_HEARTBEAT_INTERVAL } from '../config.js';
 
 export default class WebSocketConnection {
-  constructor(playerId, authToken, targetName, path, params) {
+  constructor(playerId, authToken, targetName, path, params, onError) {
     var url = `${WEBSOCKET_ENDPOINT}/ws/${path}?playerId=${playerId}&authToken=${authToken}`;
     if (params) {
       for (var param in params) {
@@ -23,7 +23,11 @@ export default class WebSocketConnection {
         console.log(`WebSocket connection to ${targetName} was closed. (Reason: (${closeEvent.code}) ${closeEvent.reason})`);
         this.stopHeartbeat();
         if (closeEvent.code !== 1000) {
-          setTimeout(createWebSocket, WEBSOCKET_RETRY_DELAY);
+          if (closeEvent.code === 1008) {
+            onError();
+          } else {
+            setTimeout(createWebSocket, WEBSOCKET_RETRY_DELAY);
+          }
         }
       }
 

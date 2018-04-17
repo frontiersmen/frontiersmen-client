@@ -8,6 +8,7 @@ import GameCreationDialog from './GameCreationDialog.js';
 import LobbyHeader from './LobbyHeader.js';
 import GameList from './GameList.js';
 import PregameList from './PregameList.js';
+import ConnectionErrorDialog from '../ConnectionErrorDialog.js';
 
 const styles = {
   button: {
@@ -25,12 +26,13 @@ class LobbyView extends Component {
       games: [],
       pregames: [],
       displayName: '',
-      gameCreationDialogOpen: false
+      gameCreationDialogOpen: false,
+      connectionErrored: false
     };
   }
 
   componentWillMount() {
-    var lobbyConnection = new LobbyConnection(this.props.playerId, this.props.authToken);
+    var lobbyConnection = new LobbyConnection(this.props.playerId, this.props.authToken, this.openConnectionErrorDialog);
     lobbyConnection.on("LobbyUpdateEvent", event => {
       this.setState({ games: event.games });
       this.setState({ pregames: event.pregames });
@@ -53,6 +55,10 @@ class LobbyView extends Component {
 
   closeGameCreationDialog = () => {
     this.setState({ gameCreationDialogOpen: false });
+  }
+
+  openConnectionErrorDialog = () => {
+    this.setState({ connectionErrored: true });
   }
 
   renderGameList(view) {
@@ -95,6 +101,7 @@ class LobbyView extends Component {
           playerId={this.props.playerId}
           onClose={this.closeGameCreationDialog}
           onSubmit={this.state.lobbyConnection.createGame} />
+        <ConnectionErrorDialog open={this.state.connectionErrored} />
       </div>
     );
   }
