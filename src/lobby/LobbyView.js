@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom'
+import {
+  Redirect,
+  Route,
+  Switch
+} from 'react-router-dom'
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
@@ -61,33 +65,22 @@ class LobbyView extends Component {
     this.setState({ connectionErrored: true });
   }
 
-  renderGameList(view) {
-    if (view === "open-games") {
-      return (
-        <PregameList pregames={this.state.pregames} />
-      );
-    } else if (view === "your-games") {
-      var games = this.state.games.filter(game => game.players.hasOwnProperty(this.props.playerId));
-      return (
-        <GameList games={games} />
-      );
-    } else {
-      return (
-        <Redirect to="/lobby/open-games" />
-      );
-    }
-  }
-
   render() {
-    const view = this.props.match.params.view;
-
     return (
       <div>
         <LobbyHeader
           displayName={this.state.displayName}
           onNameChange={this.state.lobbyConnection.changeDisplayName}
-          view={view} />
-        { this.renderGameList(view) }
+          view={this.props.match.params.view} />
+        <Switch>
+          <Route path="/lobby/open-games" render={() =>
+            <PregameList pregames={this.state.pregames} />
+          } />
+          <Route path="/lobby/your-games" render={() =>
+            <GameList games={this.state.games.filter(game => game.players.hasOwnProperty(this.props.playerId))} />
+          } />
+          <Route render={() => <Redirect to="/lobby/open-games" />} />
+        </Switch>
         <Button
           className={this.props.classes.button}
           variant="fab"
