@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { AUTH_TICKET_ENDPOINT } from '../config.js';
 
 export default class SignInPage extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ export default class SignInPage extends Component {
     var playerId = googleUser.getBasicProfile().getId();
     var idToken = googleUser.getAuthResponse().id_token;
     // fetch from API
-    fetch(`http://localhost:4567/api/auth-ticket?playerId=${playerId}&idToken=${idToken}`)
+    fetch(`${AUTH_TICKET_ENDPOINT}?playerId=${playerId}&idToken=${idToken}`)
       .then(response => response.json())
       .then(ticket => {
         this.props.onSignIn(playerId, JSON.stringify(ticket))
