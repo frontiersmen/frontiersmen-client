@@ -36,7 +36,7 @@ class LobbyView extends Component {
   }
 
   componentWillMount() {
-    var lobbyConnection = new LobbyConnection(this.props.playerId, this.props.authToken, this.openConnectionErrorDialog);
+    var lobbyConnection = new LobbyConnection(this.props.playerId, this.props.authTicket, this.openConnectionErrorDialog);
     lobbyConnection.on("LobbyUpdateEvent", event => {
       this.setState({ games: event.games });
       this.setState({ pregames: event.pregames });

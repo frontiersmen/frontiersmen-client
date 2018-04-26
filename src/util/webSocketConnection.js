@@ -3,8 +3,8 @@ import { WEBSOCKET_RETRY_DELAY } from '../config.js';
 import { WEBSOCKET_HEARTBEAT_INTERVAL } from '../config.js';
 
 export default class WebSocketConnection {
-  constructor(playerId, authToken, targetName, path, params, onError) {
-    var url = `${WEBSOCKET_ENDPOINT}/ws/${path}?playerId=${playerId}&authToken=${authToken}`;
+  constructor(playerId, authTicket, targetName, path, params, onError) {
+    var url = `${WEBSOCKET_ENDPOINT}/ws/${path}?playerId=${playerId}`;
     if (params) {
       for (var param in params) {
         url += `&${param}=${params[param]}`;
@@ -16,6 +16,10 @@ export default class WebSocketConnection {
 
       this.ws.onopen = () => {
         console.log(`Opened WebSocket connection to ${targetName}`);
+        this.send({
+          eventType: "PlayerAuthenticationEvent",
+          ticket: authTicket
+        });
         this.startHeartbeat();
       };
 

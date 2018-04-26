@@ -19,7 +19,7 @@ export default class PregameView extends Component {
   }
 
   componentWillMount() {
-    var pregameConnection = new PregameConnection(this.props.match.params.id, this.props.playerId, this.props.authToken, this.openConnectionErrorDialog);
+    var pregameConnection = new PregameConnection(this.props.match.params.id, this.props.playerId, this.props.authTicket, this.openConnectionErrorDialog);
     pregameConnection.on("PregameUpdateEvent", event => {
       this.setState({ pregame: event.pregame });
     });

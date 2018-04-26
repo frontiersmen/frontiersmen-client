@@ -16,18 +16,23 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.onSignIn = this.onSignIn.bind(this);
-    this.state = { playerId: null, authToken: null };
+    this.state = {
+      playerId: localStorage.getItem("playerId"),
+      authTicket: localStorage.getItem("authTicket")
+    };
   }
 
-  onSignIn(playerId, authToken) {
-    this.setState({ playerId: playerId, authToken: authToken });
+  onSignIn(playerId, authTicket) {
+    localStorage.setItem("playerId", playerId);
+    localStorage.setItem("authTicket", authTicket);
+    this.setState({ playerId: playerId, authTicket: authTicket });
   }
 
   render() {
     return (
       <Router>
         <div className="App">
-          <AuthContainer onSignIn={this.onSignIn}>
+          <AuthContainer signedIn={this.state.playerId && this.state.authTicket} onSignIn={this.onSignIn}>
             <Switch>
               <Route exact path="/" render={() => (
                 <Redirect to="/lobby/open-games" />
@@ -36,13 +41,13 @@ class App extends Component {
                 <Redirect to="/lobby/open-games" />
               )} />
               <Route path="/lobby/:view" render={(props) => (
-                <LobbyView {...props} playerId={this.state.playerId} authToken={this.state.authToken} />
+                <LobbyView {...props} playerId={this.state.playerId} authTicket={this.state.authTicket} />
               )} />
               <Route path="/pregame/:id" render={(props) => (
-                <PregameView {...props} playerId={this.state.playerId} authToken={this.state.authToken} />
+                <PregameView {...props} playerId={this.state.playerId} authTicket={this.state.authTicket} />
               )} />
               <Route path="/game/:id" render={(props) => (
-                <GameView {...props} playerId={this.state.playerId} authToken={this.state.authToken} />
+                <GameView {...props} playerId={this.state.playerId} authTicket={this.state.authTicket} />
               )} />
               <Route component={NotFoundPage} />
             </Switch>

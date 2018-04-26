@@ -1,10 +1,10 @@
 import WebSocketConnection from '../util/webSocketConnection.js';
 
 export default class LobbyConnection extends WebSocketConnection {
-  constructor(playerId, authToken, onError) {
+  constructor(playerId, authTicket, onError) {
     var name = "Lobby";
     var path = "lobby";
-    super(playerId, authToken, name, path, null, onError);
+    super(playerId, authTicket, name, path, null, onError);
     this.createGame = this.createGame.bind(this);
     this.changeDisplayName = this.changeDisplayName.bind(this);
   }

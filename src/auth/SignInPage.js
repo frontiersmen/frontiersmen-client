@@ -6,8 +6,19 @@ export default class SignInPage extends Component {
     this.onSignIn = this.onSignIn.bind(this);
   }
 
+  /**
+   * Swap Google ID token with auth ticket from server and pass to callback.
+   * @param {*} googleUser
+   */
   onSignIn(googleUser) {
-    this.props.onSignIn(googleUser.getBasicProfile().getId(), googleUser.getAuthResponse().id_token);
+    var playerId = googleUser.getBasicProfile().getId();
+    var idToken = googleUser.getAuthResponse().id_token;
+    // fetch from API
+    fetch(`http://localhost:4567/api/auth-ticket?playerId=${playerId}&idToken=${idToken}`)
+      .then(response => response.json())
+      .then(ticket => {
+        this.props.onSignIn(playerId, JSON.stringify(ticket))
+      });
   }
 
   componentDidMount() {
