@@ -4,13 +4,13 @@ const productionConfiguration = {
     host: 'frontiersmen.herokuapp.com',
     protocol: 'https',
     webSocketProtocol: 'wss'
-}
+};
 
 const developmentConfiguration = {
     host: 'localhost:4567',
     protocol: 'http',
     webSocketProtocol: 'ws'
-}
+};
 
 const config = production ? productionConfiguration : developmentConfiguration;
 

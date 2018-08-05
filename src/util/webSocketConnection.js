@@ -29,6 +29,10 @@ export default class WebSocketConnection {
         if (closeEvent.code !== 1000) {
           if (closeEvent.code === 1008) {
             onError();
+          } else if (closeEvent.code === 4000) {
+            localStorage.removeItem("playerId");
+            localStorage.removeItem("authTicket");
+            onError();
           } else {
             setTimeout(createWebSocket, WEBSOCKET_RETRY_DELAY);
           }
