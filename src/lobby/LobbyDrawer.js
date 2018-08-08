@@ -5,20 +5,40 @@ import Drawer from 'material-ui/Drawer';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import LaunchIcon from 'material-ui-icons/Launch';
+import { version } from '../../package.json'
 
-const styles = {
+const styles = theme => ({
   title: {
-    margin: "16px",
+    paddingTop: "16px",
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: "16px"
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: "24px"
+    },
+    width: "264px"
+  },
+  subtitle: {
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: "16px"
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: "24px"
+    },
+    paddingBottom: "8px",
     width: "264px"
   }
-}
+})
 
 function LobbyDrawer(props) {
   return (
     <div>
       <Drawer open={props.open} onClose={props.onClose}>
-        <Typography color="secondary" variant="title" className={props.classes.title}>
+        <Typography color="secondary" variant="title" gutterBottom className={props.classes.title}>
           Frontiersmen of Banan
+        </Typography>
+        <Typography color="textSecondary" variant="body1" gutterBottom className={props.classes.subtitle}>
+          Client v{version}
         </Typography>
         <Divider />
         <List>
