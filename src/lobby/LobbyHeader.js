@@ -11,9 +11,6 @@ import UserInfo from './UserInfo.js';
 import LobbyDrawer from './LobbyDrawer.js'
 
 const styles = {
-  button: {
-    width: "24px"
-  },
   title: {
     marginLeft: "32px",
     flex: 1
@@ -42,8 +39,7 @@ class LobbyHeader extends Component {
             <IconButton
               color="inherit"
               aria-label="Menu"
-              onClick={this.openDrawer}
-              className={this.props.classes.button}>
+              onClick={this.openDrawer}>
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" className={this.props.classes.title}>
