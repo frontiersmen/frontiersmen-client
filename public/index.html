@@ -22,7 +22,15 @@
     -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
     <title>React App</title>
-    <script src="https://apis.google.com/js/platform.js"></script>
+    <!-- https://stackoverflow.com/a/29833065/6497736 -->
+    <script type="text/javascript">
+      function onLoad() {
+        gapi.load('auth2', function() {
+          gapi.auth2.init();
+        });
+      }
+    </script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad"></script>
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages

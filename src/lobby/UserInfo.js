@@ -38,6 +38,10 @@ class UserInfo extends Component {
     this.props.onNameChange(name);
   }
 
+  signOut = () => {
+    this.props.onSignOut();
+  }
+
   render() {
     return (
       <div>
@@ -56,6 +60,7 @@ class UserInfo extends Component {
           open={this.state.open}
           onClose={this.closeMenu}>
           <MenuItem onClick={this.openChangeNameDialog}>Change display name</MenuItem>
+          <MenuItem onClick={this.signOut}>Sign out</MenuItem>
         </Menu>
         <ChangeDisplayNameDialog
           currentName={this.props.displayName}

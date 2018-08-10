@@ -46,7 +46,7 @@ class LobbyHeader extends Component {
             <Typography variant="title" color="inherit" className={this.props.classes.title}>
               Lobby
             </Typography>
-            <UserInfo displayName={this.props.displayName} onNameChange={this.props.onNameChange} />
+            <UserInfo displayName={this.props.displayName} onNameChange={this.props.onNameChange} onSignOut={this.props.onSignOut} />
           </Toolbar>
           <Tabs value={this.props.view} centered>
             <Tab value="open-games" label="Open Games" component={Link} to="/lobby/open-games" />

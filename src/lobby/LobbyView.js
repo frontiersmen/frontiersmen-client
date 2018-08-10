@@ -71,6 +71,7 @@ class LobbyView extends Component {
         <LobbyHeader
           displayName={this.state.displayName}
           onNameChange={this.state.lobbyConnection.changeDisplayName}
+          onSignOut={this.props.onSignOut}
           view={this.props.match.params.view} />
         <Switch>
           <Route path="/lobby/open-games" render={() =>
