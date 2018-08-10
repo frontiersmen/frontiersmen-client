@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Typography from 'material-ui/Typography';
-import Fade from 'material-ui/transitions/Fade';
-import { withStyles } from 'material-ui/styles';
+import Typography from '@material-ui/core/Typography';
+import Fade from '@material-ui/core/Fade';
+import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom'
 
 const styles = theme => ({

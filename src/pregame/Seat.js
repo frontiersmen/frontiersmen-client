@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import Button from 'material-ui/Button';
-import { ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
-import Flag from 'material-ui-icons/Flag';
+import Button from '@material-ui/core/Button';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Avatar from '@material-ui/core/Avatar';
+import FlagIcon from '@material-ui/icons/Flag';
 
 export default class Seat extends Component {
   constructor(props) {
@@ -44,7 +47,7 @@ export default class Seat extends Component {
       <ListItem>
         <ListItemIcon>
           <Avatar>
-            <Flag />
+            <FlagIcon />
           </Avatar>
         </ListItemIcon>
         {this.props.occupant && <ListItemText primary={this.props.occupant.name} />}

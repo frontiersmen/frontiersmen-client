@@ -1,10 +1,12 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import Divider from 'material-ui/Divider';
-import Drawer from 'material-ui/Drawer';
-import List, { ListItem, ListItemText } from 'material-ui/List';
-import Typography from 'material-ui/Typography';
-import LaunchIcon from 'material-ui-icons/Launch';
+import { withStyles } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Typography from '@material-ui/core/Typography';
+import LaunchIcon from '@material-ui/icons/Launch';
 import { version } from '../../package.json'
 
 const styles = theme => ({

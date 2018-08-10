@@ -1,7 +1,8 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
-import Table, { TableBody } from 'material-ui/Table';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
 import GameSummary from './GameSummary.js';
 
 const styles = {

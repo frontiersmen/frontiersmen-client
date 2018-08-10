@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PregameConnection from './pregameConnection.js';
 import Seat from './Seat.js';
-import Button from 'material-ui/Button';
-import List from 'material-ui/List';
-import Paper from 'material-ui/Paper';
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import Paper from '@material-ui/core/Paper';
 import ConnectionErrorDialog from '../ConnectionErrorDialog.js';
 
 export default class PregameView extends Component {

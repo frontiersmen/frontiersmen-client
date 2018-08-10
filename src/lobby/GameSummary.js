@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
-import { withStyles } from 'material-ui/styles';
-import { TableCell, TableRow } from 'material-ui/Table';
+import { withStyles } from '@material-ui/core/styles';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 
 const styles = {
   row: {

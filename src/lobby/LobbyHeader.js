@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
-import Tabs, { Tab } from 'material-ui/Tabs';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import MenuIcon from 'material-ui-icons/Menu';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import IconButton from '@material-ui/core/IconButton';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import MenuIcon from '@material-ui/icons/Menu';
 import UserInfo from './UserInfo.js';
 import LobbyDrawer from './LobbyDrawer.js'
 

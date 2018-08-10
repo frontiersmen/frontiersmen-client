@@ -4,9 +4,9 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
-import { withStyles } from 'material-ui/styles';
-import Button from 'material-ui/Button';
-import AddIcon from 'material-ui-icons/Add';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 import LobbyConnection from './lobbyConnection.js';
 import GameCreationDialog from './GameCreationDialog.js';
 import LobbyHeader from './LobbyHeader.js';
