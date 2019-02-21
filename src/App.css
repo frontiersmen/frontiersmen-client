@@ -26,3 +26,16 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.game-board {
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.game-board table {
+  border-collapse: collapse;
+}
+
+.game-board table, .game-board th, .game-board td {
+  border: 1px solid black;
+}

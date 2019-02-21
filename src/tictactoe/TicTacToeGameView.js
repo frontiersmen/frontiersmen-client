@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import GameConnection from './gameConnection.js';
+import GameConnection from '../game/gameConnection.js';
 import ConnectionErrorDialog from '../ConnectionErrorDialog.js';
+import TicTacToeBoard from './TicTacToeBoard.js';
 
-export default class GameView extends Component {
+export default class TicTacToeGameView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,7 +38,14 @@ export default class GameView extends Component {
             <p>#{this.state.game.id}</p>
             <p>{this.state.game.name}</p>
             <p>Created by {this.state.game.creator.name}</p>
-            {this.state.game.pregame ? <button onClick={this.state.gameConnection.startGame}>Start</button> : null}
+            <TicTacToeBoard board={this.state.game.board.spaces} onPlaceMark={this.state.gameConnection.placeMark}/>
+            {this.state.game.isOver && (
+              this.state.game.victor ? (
+                this.state.game.victor.name + " has won"
+              ) : (
+                "Stalemate"
+              )
+            )}
           </div>
         ) : (
           <div>Loading...</div>

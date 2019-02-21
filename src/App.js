@@ -9,7 +9,7 @@ import './App.css';
 import AuthContainer from './auth/AuthContainer.js'
 import LobbyView from './lobby/LobbyView.js'
 import PregameView from './pregame/PregameView.js';
-import GameView from './game/GameView.js';
+import TicTacToeGameView from './tictactoe/TicTacToeGameView.js';
 import NotFoundPage from './NotFoundPage.js';
 
 class App extends Component {
@@ -65,7 +65,7 @@ class App extends Component {
                   authTicket={this.state.authTicket} />
               )} />
               <Route path="/game/:id" render={(props) => (
-                <GameView {...props}
+                <TicTacToeGameView {...props}
                   playerId={this.state.playerId}
                   authTicket={this.state.authTicket} />
               )} />

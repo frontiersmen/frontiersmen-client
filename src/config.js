@@ -1,4 +1,4 @@
-const production = true;
+const production = false;
 
 const productionConfiguration = {
     host: 'frontiersmen.herokuapp.com',
