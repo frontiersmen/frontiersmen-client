@@ -1,18 +1,6 @@
-const production = false;
+const environment = 'production';
 
-const productionConfiguration = {
-    host: 'frontiersmen.herokuapp.com',
-    protocol: 'https',
-    webSocketProtocol: 'wss'
-};
-
-const developmentConfiguration = {
-    host: 'localhost:4567',
-    protocol: 'http',
-    webSocketProtocol: 'ws'
-};
-
-const config = production ? productionConfiguration : developmentConfiguration;
+const config = require('./config.json')[environment];
 
 export const AUTH_TICKET_ENDPOINT = `${config.protocol}://${config.host}/api/auth-ticket`;
 export const WEBSOCKET_ENDPOINT = `${config.webSocketProtocol}://${config.host}`;

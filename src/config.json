@@ -1,0 +1,12 @@
+{
+    "development": {
+        "host": "localhost:4567",
+        "protocol": "http",
+        "webSocketProtocol": "ws"
+    },
+    "production": {
+        "host": "frontiersmen.herokuapp.com",
+        "protocol": "https",
+        "webSocketProtocol": "wss"
+    }
+}
